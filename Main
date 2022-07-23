@@ -119,10 +119,12 @@ def dijsktra(graph, initial, end):
     # Reverse path
     path = path[::-1]
     return path
-
+    
+print('**********PART A BELOW*************')
 #Displaying the shortest path from x to F with original values
 partA = create_graph()
 print('\nOriginal Graph \nShortest Route: ', dijsktra(partA, 'X', 'F'), '\n\n')
 #Displaying the shortest path from x to F with the updated values
+print('**********PART B BELOW*************')
 partB = create_graph2()
 print('\nUpdated Graph \nShortest Route: ', dijsktra(partB, 'X', 'F'))
