@@ -1,0 +1,125 @@
+#Hannah Neymeyer
+#Prof Locklair
+#CSC 415
+#Depth & Breadth Search
+
+class Tree:
+    def __init__(self):
+        self.Nodes = []
+        self.root = None
+        self.open = []
+        self.closed = []
+
+    def add(self, node):
+        if self.root is None:
+            self.root = node
+            self.open.insert(0, self.root)
+        self.Nodes.append(node)
+
+    def print_open(self):
+        arr = []
+        for node in self.open:
+            arr.append(node.letter)
+        #Display the open node
+        print('Open Node/s: ', arr)
+        arr = []
+    def print_closed(self):
+        arr = []
+        for node in self.closed:
+            arr.append(node.letter)
+
+        print('Closed Node/s: ', arr)
+        arr = []
+        
+#Depth Search; Part 2 of assignment
+    def depth_search(self, currentnode, goal_dest):
+        self.print_open()
+        self.print_closed()
+        if currentnode.right is not None:
+            self.open.insert(0, currentnode.right)
+        if currentnode.left is not None:
+            # Bring to front
+            self.open.insert(0, currentnode.left)
+        self.open.remove(currentnode)
+        self.closed.insert(0, currentnode)
+        if currentnode.left is not None:
+            self.depth_search(currentnode.left, goal_dest)
+        if currentnode.right is not None:
+            self.depth_search(currentnode.right, goal_dest)
+    print('*********Below is Part 2 of assignment; Depth First Search*********')            
+#Part 3 of assignment, Breadth search first 
+    def breadth_search(self, currentnode, goal_dest):
+        self.print_open()
+        self.print_closed()
+        if currentnode.left is not None:
+            self.open.append(currentnode.left)
+        if currentnode.right is not None:
+            self.open.append(currentnode.right)=
+        self.open.remove(currentnode)
+        self.closed.insert(0,currentnode)
+        if currentnode.letter is goal_dest:
+            print(goal_dest, 'was found in search')
+            print('*********Below is Part 3 of assignment Breadth First Search*********')
+
+        for x in self.open:
+            self.breadth_search(x, goal_dest)
+#Defining the values for the graph so the searches can run through them
+def graph():
+    g1 = Tree()
+    A = Node('A')
+    B = Node('B')
+    C = Node('C')
+    D = Node('D')
+    E = Node('E')
+    F = Node('F')
+    G1 = Node('G1')
+    H = Node('H')
+    I = Node('I')
+    J = Node('J')
+    K = Node('K')
+    L = Node('L')
+    M = Node('M')
+    N = Node('N')
+    G2 = Node('G2')
+#Setting the values of neighbors
+    A.values(None, B, C)
+    B.values(A, D, E)
+    C.values(A, F, H)
+    D.values(B, I, J)
+    E.values(B, G1, K)
+    F.values(C, L, M)
+    G1.values(E, None, None)
+    H.values(C, N, G2)
+    I.values(D, None, None)
+    J.values(D, None, None)
+    K.values(E, None, None)
+    L.values(F, None, None)
+    M.values(F, None, None)
+    N.values(H, None, None)
+    G2.values(H, None, None)
+    g1.add(A)
+    g1.add(B)
+    g1.add(C)
+    g1.add(D)
+    g1.add(E)
+    g1.add(F)
+    g1.add(G1)
+    g1.add(H)
+    g1.add(I)
+    g1.add(J)
+    g1.add(K)
+    g1.add(L)
+    g1.add(G2)
+
+    return g1
+class Node:
+    def __init__(self, letter):
+        self.letter = letter
+   
+    def values(self, parent, left, right):
+        self.parent = parent
+        self.left = left
+        self.right = right
+#final running command
+graph = graph()
+graph.breadth_search(graph.root, 'F')
